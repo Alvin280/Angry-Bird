@@ -1,34 +1,29 @@
-// namespacing
-const Engine= Matter.Engine
-const World= Matter.World
-const Bodies= Matter.Bodies
+const Engine = Matter.Engine;
+const World= Matter.World;
+const Bodies = Matter.Bodies;
 
+var engine, world;
+var ground, ball;
+var box1,box2;
 
-var myengine,myworld;
-var object,ground,ball;
+function setup(){
+    var canvas = createCanvas(400,400);
+    engine = Engine.create();
+    world = engine.world;
 
-function setup() {
-  createCanvas(400,400);
-    myengine=Engine.create();
-    myworld=myengine.world;
+    box1= new Box(100,200,50,50);
+    box2=new Box(120,10,50,70);
 
-    var object_option={ isStatic:true }
-    var ball_option={restitution:1}
-    ground= Bodies.rectangle(200,380,400,9,object_option);
-    World.add(myworld,ground);
-   ball=Bodies.circle(200,200,10,ball_option)
-   World.add(myworld,ball)
-    console.log(ground.position.x);
-    console.log(ground.position.y);
+    console.log(ground);
+
+    ground=new Ground(200,380,400,10);
 }
 
-function draw() {
-  background(0);  
-  Engine.update(myengine);
-  ellipseMode(RADIUS)
-  ellipse(ball.position.x,ball.position.y,20,20)
-  rectMode(CENTER);
-  rect(ground.position.x, ground.position.y, 400, 9);
-  
-  drawSprites();
+function draw(){
+    background(0);
+    Engine.update(engine);
+    
+    box1.display();
+    ground.display();
+    box2.display();
 }
